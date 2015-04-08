@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require 'data_mapper'
 require './lib/tag'
+require './lib/user'
+require './lib/link'
 
 env = ENV['RACK_ENV'] || 'development'
 
