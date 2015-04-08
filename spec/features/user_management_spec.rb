@@ -1,4 +1,7 @@
 require 'spec_helper'
+require './helpers/session'
+
+include SessionHelpers
 
 feature 'User signs up' do
   scenario 'when being a new user visiting the site' do
@@ -19,14 +22,6 @@ feature 'User signs up' do
     expect(page).to have_content('This email is already taken')
   end
 
-  def sign_up email = 'alice@example.com', password = 'oranges!', password_confirmation = 'oranges!'
-    visit '/users/new'
-    expect(page.status_code).to eq 200
-    fill_in :email, with: email
-    fill_in :password, with: password
-    fill_in :password_confirmation, with: password_confirmation
-    click_button 'Sign up'
-  end
 end
 
 feature 'User signs in' do
@@ -51,12 +46,6 @@ feature 'User signs in' do
     expect(page).not_to have_content('Welcome, test@test.com')
   end
 
-  def sign_in(email, password)
-    visit '/sessions/new'
-    fill_in 'email', with: email
-    fill_in 'password', with: password
-    click_button 'Sign in'
-  end
 end
 
 feature 'User signs out' do

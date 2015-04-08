@@ -4,6 +4,7 @@ require 'rack-flash'
 require './lib/tag'
 require './lib/user'
 require './lib/link'
+require 'tilt/erb'
 
 env = ENV['RACK_ENV'] || 'development'
 
@@ -18,6 +19,7 @@ class BookmarkManager < Sinatra::Base
 
   enable :sessions
   use Rack::Flash
+  use Rack::MethodOverride
   set :session_secret, 'super secret'
 
   get '/' do
@@ -78,6 +80,11 @@ class BookmarkManager < Sinatra::Base
       flash[:errors] = ['The email or password is incorrect']
       erb :'sessions/new'
     end
+  end
+
+  delete '/sessions' do
+    session[:user_id] = nil
+    erb :'sessions/goodbye'
   end
 
   helpers do
