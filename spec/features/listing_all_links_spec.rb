@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature "User browses the list of links" do
 
-  before(:each) {
+  before(:each) do
     Link.create(url: "http://www.makersacademy.com",
                 title: "Makers Academy",
                 tags: [Tag.first_or_create(text: 'education')])
@@ -15,7 +15,7 @@ feature "User browses the list of links" do
     Link.create(url: "http://www.code.org",
                 title: "Code.org",
                 tags: [Tag.first_or_create(text: 'education')])
-  }
+  end
 
   scenario "when opening the home page" do
     visit '/'
